@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(lsof -ti:8000)",
+      "Bash(xargs kill *)",
+      "Bash(curl -s -X POST http://localhost:8000/query -H 'Content-Type: application/json' -d '{\"question\": \"Нотариустардың кәсіби жауапкершілік сақтандыру талаптары қандай?\"}')",
+      "Bash(python -m json.tool)",
+      "Bash(curl -s -X POST http://localhost:8000/query -H 'Content-Type: application/json' -d '{\"question\": \"Нотариустардың кәсіби жауапкершілік сақтандыру талаптары қандай?\"}' --max-time 60)",
+      "Bash(curl -s -X POST http://localhost:8000/query -H 'Content-Type: application/json' -d '{\"question\": \"Каковы условия обязательного экологического страхования в Казахстане?\"}' --max-time 60)",
+      "Bash(curl -s -X POST http://localhost:8000/query -H 'Content-Type: application/json' -d '{\"question\": \"Что страхуется по обязательному страхованию ответственности владельцев опасных объектов?\"}' --max-time 60)",
+      "Bash(curl -s -X POST http://localhost:8000/query -H 'Content-Type: application/json' -d '{\"question\": \"Каковы условия ОГПОВТС — обязательного страхования гражданско-правовой ответственности владельцев транспортных средств?\"}' --max-time 60)",
+      "Bash(curl -s -X POST http://localhost:8000/query -H 'Content-Type: application/json' -d '{\"question\": \"Жолаушыларды тасымалдаушылардың жауапкершілігін сақтандыру туралы не деп жазылған?\"}' --max-time 60)",
+      "Bash(curl -s -X POST http://localhost:8000/query -H 'Content-Type: application/json' -d '{\"question\": \"Глава 40 ГК РК — что регулирует и каковы основные положения о страховании?\"}' --max-time 60)"
+    ]
+  }
+}

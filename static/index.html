@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aqyl AI — Страховой Ассистент РК</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+<div class="app-container">
+
+    <!-- ── Sidebar ── -->
+    <aside class="sidebar">
+        <div class="logo-wrap">
+            <div class="logo-icon"><i class="fas fa-shield-halved"></i></div>
+            <div class="logo-text">
+                <span class="logo-name">Aqyl AI</span>
+                <span class="logo-sub">Страхование РК</span>
+            </div>
+        </div>
+
+        <div class="sidebar-section-label">НАВИГАЦИЯ</div>
+        <nav class="sidebar-nav">
+            <a class="nav-item active" data-view="chat" href="#">
+                <i class="fas fa-comments"></i><span>Консультация</span>
+            </a>
+            <a class="nav-item" data-view="knowledge" href="#">
+                <i class="fas fa-book-open"></i><span>База знаний</span>
+            </a>
+            <a class="nav-item" data-view="history" href="#">
+                <i class="fas fa-clock-rotate-left"></i><span>История</span>
+                <span class="nav-badge" id="history-badge" style="display:none"></span>
+            </a>
+        </nav>
+
+        <div class="sidebar-section-label">ДОКУМЕНТЫ</div>
+        <div class="doc-list">
+            <div class="doc-item" data-q="Что регулирует Глава 40 ГК РК?"><i class="fas fa-file-lines"></i><span>ГК РК Глава 40</span></div>
+            <div class="doc-item" data-q="Каковы условия ОГПОВТС?"><i class="fas fa-file-lines"></i><span>ОС ГПО ВТС</span></div>
+            <div class="doc-item" data-q="Нотариустардың кәсіби жауапкершілік сақтандыру талаптары қандай?"><i class="fas fa-file-lines"></i><span>ОС Нотариусы</span></div>
+            <div class="doc-item" data-q="Каковы условия обязательного экологического страхования?"><i class="fas fa-file-lines"></i><span>ОС Экология</span></div>
+            <div class="doc-item" data-q="Что страхуется при страховании ответственности владельцев опасных объектов?"><i class="fas fa-file-lines"></i><span>ОС Опасные объекты</span></div>
+            <div class="doc-item" data-q="Жолаушыларды тасымалдаушылардың жауапкершілігін сақтандыру туралы не деп жазылған?"><i class="fas fa-file-lines"></i><span>ОС Перевозчика</span></div>
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="status-row">
+                <span class="status-dot"></span>
+                <span class="status-text">DeepSeek V3 • Online</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ── Main ── -->
+    <main class="chat-main">
+
+        <!-- Header (меняется по view) -->
+        <header class="chat-header">
+            <div class="header-left">
+                <div>
+                    <h2 id="header-title">Интеллектуальный помощник</h2>
+                    <p id="header-sub">Эксперт по страховому законодательству РК</p>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button id="clear-chat" class="clear-btn" title="Очистить чат">
+                    <i class="fas fa-trash-can"></i><span>Очистить</span>
+                </button>
+                <button id="clear-history-btn" class="clear-btn danger" title="Удалить историю" style="display:none">
+                    <i class="fas fa-trash-can"></i><span>Удалить всё</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- ══ VIEW: Chat ══ -->
+        <div id="view-chat" class="view active">
+            <div id="chat-messages" class="messages-wrap">
+                <div class="welcome-block">
+                    <div class="welcome-icon"><i class="fas fa-scale-balanced"></i></div>
+                    <h3>Добро пожаловать в Aqyl AI</h3>
+                    <p>Задайте любой вопрос по страховому законодательству Казахстана — я дам точный ответ со ссылкой на нормативный документ.</p>
+                    <div class="welcome-chips">
+                        <button class="chip" data-q="Что регулирует Глава 40 ГК РК?">ГК РК Глава 40</button>
+                        <button class="chip" data-q="Каковы условия ОГПОВТС?">ОГПОВТС</button>
+                        <button class="chip" data-q="Нотариустардың кәсіби жауапкершілік сақтандыру талаптары қандай?">Нотариустар</button>
+                        <button class="chip" data-q="Каковы условия обязательного экологического страхования?">Экология</button>
+                        <button class="chip" data-q="Что страхуется при страховании ответственности владельцев опасных объектов?">Опасные объекты</button>
+                        <button class="chip" data-q="Жолаушыларды тасымалдаушылардың жауапкершілігін сақтандыру туралы не деп жазылған?">Перевозчик</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <div class="input-box">
+                    <textarea id="user-input" placeholder="Введите вопрос на русском или казахском языке..." rows="1"></textarea>
+                    <button id="send-btn" title="Отправить (Enter)"><i class="fas fa-paper-plane"></i></button>
+                </div>
+                <p class="input-hint">Enter — отправить &nbsp;·&nbsp; Shift+Enter — новая строка</p>
+            </div>
+        </div>
+
+        <!-- ══ VIEW: База знаний ══ -->
+        <div id="view-knowledge" class="view">
+            <div class="page-wrap">
+                <p class="page-desc">Система обучена на следующих нормативных актах Республики Казахстан. Нажмите на карточку, чтобы задать вопрос по документу.</p>
+                <div class="knowledge-grid">
+
+                    <div class="kb-card" data-q="Что регулирует Глава 40 ГК РК?">
+                        <div class="kb-icon" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)"><i class="fas fa-gavel"></i></div>
+                        <div class="kb-body">
+                            <h4>ГК РК — Глава 40 «Страхование»</h4>
+                            <p>Гражданский кодекс РК, Особенная часть. Основные понятия договора страхования, формы и виды, права и обязанности сторон, исламское страхование.</p>
+                            <div class="kb-tags"><span>Договор страхования</span><span>Обязательное страхование</span><span>ГК РК ст. 803–845</span></div>
+                        </div>
+                        <i class="fas fa-arrow-right kb-arrow"></i>
+                    </div>
+
+                    <div class="kb-card" data-q="Каковы условия ОГПОВТС?">
+                        <div class="kb-icon" style="background:linear-gradient(135deg,#f59e0b,#b45309)"><i class="fas fa-car-burst"></i></div>
+                        <div class="kb-body">
+                            <h4>ОС ГПО ВТС (ОГПОВТС)</h4>
+                            <p>Обязательное страхование гражданско-правовой ответственности владельцев транспортных средств. Условия договора, объект страхования, выплаты пострадавшим.</p>
+                            <div class="kb-tags"><span>Авто страхование</span><span>ДТП</span><span>Возмещение вреда</span></div>
+                        </div>
+                        <i class="fas fa-arrow-right kb-arrow"></i>
+                    </div>
+
+                    <div class="kb-card" data-q="Нотариустардың кәсіби жауапкершілік сақтандыру талаптары қандай?">
+                        <div class="kb-icon" style="background:linear-gradient(135deg,#22c55e,#15803d)"><i class="fas fa-stamp"></i></div>
+                        <div class="kb-body">
+                            <h4>ОС ГПО Нотариусов</h4>
+                            <p>Обязательное страхование гражданско-правовой ответственности частных нотариусов. Требования к страхованию, объект, условия заключения договора.</p>
+                            <div class="kb-tags"><span>Нотариусы</span><span>Профессиональная ответственность</span></div>
+                        </div>
+                        <i class="fas fa-arrow-right kb-arrow"></i>
+                    </div>
+
+                    <div class="kb-card" data-q="Каковы условия обязательного экологического страхования?">
+                        <div class="kb-icon" style="background:linear-gradient(135deg,#10b981,#065f46)"><i class="fas fa-leaf"></i></div>
+                        <div class="kb-body">
+                            <h4>ОС Экологической ответственности</h4>
+                            <p>Обязательное экологическое страхование для лиц, осуществляющих экологически опасные виды деятельности. Объект, страховые случаи, возмещение экологического ущерба.</p>
+                            <div class="kb-tags"><span>Экология</span><span>Авария</span><span>Экологический ущерб</span></div>
+                        </div>
+                        <i class="fas fa-arrow-right kb-arrow"></i>
+                    </div>
+
+                    <div class="kb-card" data-q="Что страхуется при страховании ответственности владельцев опасных объектов?">
+                        <div class="kb-icon" style="background:linear-gradient(135deg,#ef4444,#991b1b)"><i class="fas fa-triangle-exclamation"></i></div>
+                        <div class="kb-body">
+                            <h4>ОС Опасных объектов</h4>
+                            <p>Обязательное страхование ответственности владельцев объектов, деятельность которых связана с риском причинения вреда третьим лицам.</p>
+                            <div class="kb-tags"><span>Опасные объекты</span><span>Промышленная безопасность</span></div>
+                        </div>
+                        <i class="fas fa-arrow-right kb-arrow"></i>
+                    </div>
+
+                    <div class="kb-card" data-q="Жолаушыларды тасымалдаушылардың жауапкершілігін сақтандыру туралы не деп жазылған?">
+                        <div class="kb-icon" style="background:linear-gradient(135deg,#8b5cf6,#5b21b6)"><i class="fas fa-bus"></i></div>
+                        <div class="kb-body">
+                            <h4>ОС Перевозчика перед пассажирами</h4>
+                            <p>Обязательное страхование гражданско-правовой ответственности перевозчика перед пассажирами. Виды транспорта, объект страхования, выплаты.</p>
+                            <div class="kb-tags"><span>Перевозчики</span><span>Пассажиры</span><span>Транспорт</span></div>
+                        </div>
+                        <i class="fas fa-arrow-right kb-arrow"></i>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ VIEW: История ══ -->
+        <div id="view-history" class="view">
+            <div class="page-wrap">
+                <p class="page-desc">Сохранённые сессии чата. Нажмите на сессию, чтобы просмотреть переписку.</p>
+                <div id="history-list" class="history-list">
+                    <div class="empty-page">
+                        <i class="fas fa-clock-rotate-left"></i>
+                        <p>История пуста</p>
+                        <span>Ваши консультации будут сохраняться здесь</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ── Right panel ── -->
+    <aside class="right-panel">
+        <div class="panel-section">
+            <h4><i class="fas fa-bookmark"></i> Источники</h4>
+            <div id="sources-list" class="sources-box">
+                <p class="empty-msg">Источники появятся после запроса</p>
+            </div>
+        </div>
+        <div class="panel-section">
+            <h4><i class="fas fa-bolt"></i> Быстрые вопросы</h4>
+            <div class="quick-list">
+                <button class="quick-btn" data-q="Что регулирует Глава 40 ГК РК?">Глава 40 ГК РК</button>
+                <button class="quick-btn" data-q="Каковы условия ОГПОВТС?">Условия ОГПОВТС</button>
+                <button class="quick-btn" data-q="Что такое обязательное страхование в РК?">Обязательное страхование</button>
+                <button class="quick-btn" data-q="Какую ответственность несёт нотариус?">Ответственность нотариуса</button>
+                <button class="quick-btn" data-q="Страхование экологических рисков в Казахстане">Экологические риски</button>
+                <button class="quick-btn" data-q="Права пострадавшего при ДТП в Казахстане">Права при ДТП</button>
+            </div>
+        </div>
+        <div class="panel-section panel-info">
+            <h4><i class="fas fa-circle-info"></i> О системе</h4>
+            <p>Ответы формируются на основе действующих нормативных актов РК. Система не заменяет юридическую консультацию.</p>
+        </div>
+    </aside>
+
+</div>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+python-docx
+langchain==0.3.25
+langchain-community==0.3.24
+langchain-google-genai==2.0.10
+langchain-text-splitters==0.3.8
+chromadb
+python-dotenv
+pydantic
+python-multipart
+jinja2
+bs4
+requests
