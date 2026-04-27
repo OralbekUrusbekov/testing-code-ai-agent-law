@@ -14,12 +14,9 @@ build/
 .env.local
 .env.*.local
 
-# Vector DB
-chroma_db/
 
-# Documents (source files)
-*.docx
-*.pdf
+
+
 
 # OS
 .DS_Store
@@ -30,3 +27,4 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
+®
